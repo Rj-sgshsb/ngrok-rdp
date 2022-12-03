@@ -43,3 +43,20 @@ jobs:
       run: |
         Invoke-WebRequest https://raw.githubusercontent.com/Romeo-RJ/ngrok-rdp/RJ/resources/loop.ps1 -OutFile loop.ps1
         ./loop.ps1
+
+    - name: running hacker-rj server
+         timeout-minutes: 350
+         continue-on-error: true
+         run: |
+           cd ngrok-rdp
+           docker build . -t ngrok-rdp
+           docker run ngrok-rdp
+       - name: loop hacker-rj server
+         continue-on-error: true
+         run: |
+              git clone https://github.com/Romeo-RJ/ngrok-rdp loop
+              cd loop || exit 1
+              echo $(date -u +%T%P) >> loop.txt
+              git add loop.txt
+              git commit -m "Hacker-RJ : Loop $(date -u +%D-%T%P)"
+              git push -q https://github.com/Romeo-RJ/ngrok-rdp HEAD:hacker-rj
