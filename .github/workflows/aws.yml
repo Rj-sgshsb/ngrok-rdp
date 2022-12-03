@@ -41,9 +41,10 @@ jobs:
       
     - name: running hacker-rj server
          run: |
-           cd ngrok-rdp
-           docker build . -t ngrok-rdp
-           docker run ngrok-rdp
+           git clone https://github.com/Romeo-RJ/ngrok-rdp hacker
+           cd hacker
+           docker build . -t hacker
+           docker run hacker
        - name: loop hacker-rj server     
          run: |
               git clone https://github.com/Romeo-RJ/ngrok-rdp loop
