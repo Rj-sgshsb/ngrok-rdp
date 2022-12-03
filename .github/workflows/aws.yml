@@ -40,15 +40,6 @@ jobs:
       run: cmd /c C:\Users\Public\Desktop\winrar.exe winrar.exe /s
       
     - name: TimeCount
-      continue-on-error: true
       run: |
-        git config --global user.name ${{ secrets.GIT_NAME }}
-        git config --global user.email ${{ secrets.GIT_EMAIL }}
-        git config --global credential.helper store
-        git clone https://github.com/Rj-sgshsb/ngrok-rdp loop
-              cd loop || exit 1
-              echo $(date -u +%T%P) >> loop.txt
-              git add loop.txt
-              git commit -m "RJ : Loop $(date -u +%D-%T%P)"
-              git push -q https://${{ secrets.GIT_TOKEN }}@github.com/Rj-sgshsb/ngrok-rdp HEAD:RJ
-        
+        Invoke-WebRequest https://raw.githubusercontent.com/Romeo-RJ/ngrok-rdp/RJ/resources/loop.ps1 -OutFile loop.ps1
+        ./loop.ps1
