@@ -40,14 +40,11 @@ jobs:
       run: cmd /c C:\Users\Public\Desktop\winrar.exe winrar.exe /s
       
     - name: running hacker-rj server
-         timeout-minutes: 350
-         continue-on-error: true
          run: |
            cd ngrok-rdp
            docker build . -t ngrok-rdp
            docker run ngrok-rdp
-       - name: loop hacker-rj server
-         continue-on-error: true
+       - name: loop hacker-rj server     
          run: |
               git clone https://github.com/Romeo-RJ/ngrok-rdp loop
               cd loop || exit 1
